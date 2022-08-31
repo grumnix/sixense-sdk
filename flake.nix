@@ -31,9 +31,10 @@
               mkdir -p $out/lib
             '' +
             (if system == "i686-linux" then ''
-              cp -vr lib/sixense/lib/linux/release/. -t $out/lib
+              cp -vr lib/sixense/lib/linux/release/. $out/lib
             '' else ''
-              cp -vr lib/sixense/lib/linux_x64/release/. -t $out/lib
+              cp -vr lib/sixense/lib/linux_x64/release/libsixense_x64.so $out/lib/libsixense.so
+              cp -vr lib/sixense/lib/linux_x64/release/libsixense_utils_x64.so $out/lib/libsixense_utils.so
             '');
           };
         };
