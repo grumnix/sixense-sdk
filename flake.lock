@@ -15,22 +15,6 @@
         "type": "github"
       }
     },
-    "hydrajoy_src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1524705612,
-        "narHash": "sha256-lyjLl+5oIEHBsY2b7O1dPPlUw5nk5UpOVHwitC5B280=",
-        "owner": "yomboprime",
-        "repo": "hydrajoy",
-        "rev": "61d5da4441a9878c581af61aa0f8b75cfe9870c4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "yomboprime",
-        "repo": "hydrajoy",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1661864979,
@@ -50,8 +34,31 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "hydrajoy_src": "hydrajoy_src",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "sixense-sdk-full": "sixense-sdk-full"
+      }
+    },
+    "sixense-sdk-full": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1661974618,
+        "narHash": "sha256-yjIu7vH9XJuAf71Ha1Hvr4a7MKMr+fEqTCUOVnB4BEA=",
+        "owner": "grumnix",
+        "repo": "sixense-sdk-full",
+        "rev": "0dde27d70bdcee9d0fed17987749974e20f90063",
+        "type": "github"
+      },
+      "original": {
+        "owner": "grumnix",
+        "repo": "sixense-sdk-full",
+        "type": "github"
       }
     }
   },
