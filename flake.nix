@@ -12,7 +12,7 @@
     flake-utils.lib.eachSystem [ "x86_64-linux" ]  (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-      in {
+      in rec {
         packages = rec {
           default = sixense-sdk;
 
@@ -55,6 +55,15 @@
               pkgs.libGL
               pkgs.libGLU
             ];
+          };
+        };
+
+        apps = rec {
+          default = simple3d;
+
+          simple3d = {
+            type = "app";
+            program = "${packages.sixense-sdk}/bin/sixense-sdk-simple3d";
           };
         };
       }
