@@ -17,26 +17,11 @@
           default = sixense-sdk;
 
           sixense-sdk = pkgs.stdenv.mkDerivation rec {
-            pname = "sixense-sdk";
-            version = "0.0";
+            name = "sixense-sdk";
 
             src = ./.;
 
-            buildPhase = ''
-              g++ \
-                -o sixense-sdk-simple3d \
-                ${sixense-sdk-full.packages.${system}.default}/src/sixense_simple3d/progs/demos/sixense_simple3d/sixense_simple3d.c \
-                -I${sixense-sdk-full.packages.${system}.default}/include \
-                -lGL -lGLU -lglut \
-            '' +
-            (if system == "i686-linux"
-             then ''-L${sixense-sdk-full.packages.${system}.default}/lib/linux/release -lsixense -lsixense_utils''
-             else ''-L${sixense-sdk-full.packages.${system}.default}/lib/linux_x64/release -lsixense_x64 -lsixense_utils_x64'');
-
             installPhase = ''
-              mkdir -p $out/bin
-              install sixense-sdk-simple3d $out/bin/
-
               mkdir -p $out/include
               cp -vr ${sixense-sdk-full.packages.${system}.default}/include/. -t $out/include
               mkdir -p $out/lib
@@ -49,8 +34,29 @@
               cp -vr ${sixense-sdk-full.packages.${system}.default}/lib/linux_x64/release/libsixense_utils_x64.so \
                 $out/lib/libsixense_utils.so
             '');
+          };
+
+          simple3d = pkgs.stdenv.mkDerivation rec {
+            name = "sixense-sdk-simple3d";
+
+            src = ./.;
+
+            buildPhase = ''
+              g++ \
+                -o sixense-sdk-simple3d \
+                ${sixense-sdk-full.packages.${system}.default}/src/sixense_simple3d/progs/demos/sixense_simple3d/sixense_simple3d.c \
+                -lGL -lGLU -lglut \
+                -lsixense -lsixense_utils
+            '';
+
+            installPhase = ''
+              mkdir -p $out/bin
+              install sixense-sdk-simple3d $out/bin/
+            '';
 
             buildInputs = [
+              sixense-sdk
+
               pkgs.freeglut
               pkgs.libGL
               pkgs.libGLU
@@ -63,7 +69,7 @@
 
           simple3d = {
             type = "app";
-            program = "${packages.sixense-sdk}/bin/sixense-sdk-simple3d";
+            program = "${packages.simple3d}/bin/sixense-sdk-simple3d";
           };
         };
       }
