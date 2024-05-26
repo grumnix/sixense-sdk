@@ -1,6 +1,6 @@
 {
   inputs = rec {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-24.05";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -23,7 +23,11 @@
 
               2. Add SDK to /nix/store:
 
-                nix store add-path "~/.local/share/Steam/steamapps/common/Sixense SDK/SixenseSDK/"
+                nix store add-path ~/.local/share/Steam/steamapps/common/Sixense\ SDK/SixenseSDK/
+
+              or
+
+                nix store add-path ~/.steam/debian-installation/steamapps/common/Sixense\ SDK/SixenseSDK/
             '';
           };
 
